@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+.dockerignore
+
+# Environment
+.env
+.env.*
+
+# Documentation
+README.md
+LICENSE
+*.md
+
+# n8n data
+.n8n/
+*.db
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log
+
+# Backup
+*.bak
+*.backup

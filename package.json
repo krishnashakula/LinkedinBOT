@@ -1,0 +1,30 @@
+{
+  "name": "n8n-railway-deployment",
+  "version": "1.0.0",
+  "description": "Production-ready n8n self-hosted deployment for Railway",
+  "scripts": {
+    "start": "n8n",
+    "dev": "docker-compose up",
+    "down": "docker-compose down",
+    "logs": "docker-compose logs -f n8n",
+    "test": "python run_tests.py",
+    "test:unit": "pytest tests/unit/ -v -m unit",
+    "test:integration": "pytest tests/integration/ -v -m integration",
+    "lint": "ruff check src/ tests/",
+    "lint:fix": "ruff check --fix src/ tests/",
+    "format": "ruff format src/ tests/ && black src/ tests/",
+    "format:check": "ruff format --check src/ tests/",
+    "check": "ruff check src/ tests/ && pytest tests/ --cov=src"
+  },
+  "keywords": [
+    "n8n",
+    "workflow",
+    "automation",
+    "railway",
+    "deployment"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
