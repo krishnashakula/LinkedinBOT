@@ -1,8 +1,12 @@
-.PHONY: help install test lint format check clean dev up down logs
+.PHONY: help install test lint format check clean dev up down logs cli
 
 help:
 	@echo "Available commands:"
 	@echo "  make install    - Install dependencies"
+	@echo "  make cli        - Show CLI help"
+	@echo "  make health     - Check n8n health"
+	@echo "  make validate   - Validate configuration"
+	@echo "  make info       - Show environment info"
 	@echo "  make test       - Run tests with coverage"
 	@echo "  make lint       - Run ruff linter"
 	@echo "  make format     - Format code with ruff and black"
@@ -13,29 +17,41 @@ help:
 	@echo "  make down       - Stop docker-compose services"
 	@echo "  make logs       - View docker-compose logs"
 
+cli:
+	python cli.py --help
+
+health:
+	python cli.py health
+
+validate:
+	python cli.py validate
+
+info:
+	python cli.py info
+
 install:
 	pip install -r requirements.txt
 	pip install -r requirements-dev.txt
 	pre-commit install
 
 test:
-	pytest tests/ -v --cov --cov-report=term-missing --cov-report=html
+	python cli.py test --coverage
 
 test-unit:
-	pytest tests/unit/ -v -m unit
+	python cli.py test --unit
 
 test-integration:
-	pytest tests/integration/ -v -m integration
+	python cli.py test --integration
 
 lint:
-	ruff check src/ tests/
-	mypy src/ tests/
+	python cli.py lint
 
 format:
-	ruff check --fix src/ tests/
-	black src/ tests/
+	python cli.py format
 
-check: lint test
+check:
+	python cli.py lint
+	python cli.py test --coverage
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
