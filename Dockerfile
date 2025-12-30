@@ -12,5 +12,5 @@ ENV NODE_ENV=production \
 # Expose the n8n port
 EXPOSE 5678
 
-# Start n8n properly
-CMD ["n8n", "start"]
+# Use the entrypoint and command from the base image
+# Don't override CMD - let the base image handle it
