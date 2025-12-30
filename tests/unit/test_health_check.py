@@ -81,9 +81,7 @@ class TestHealthChecker:
             mock_instance = AsyncMock()
             mock_instance.__aenter__.return_value = mock_instance
             mock_instance.__aexit__.return_value = None
-            mock_instance.get = AsyncMock(
-                side_effect=httpx.RequestError("Connection error")
-            )
+            mock_instance.get = AsyncMock(side_effect=httpx.RequestError("Connection error"))
             mock_client.return_value = mock_instance
 
             result = await health_checker.check_health()
@@ -105,9 +103,7 @@ class TestHealthChecker:
         """Test full health check."""
         with patch.object(
             health_checker, "check_health", return_value={"status": "healthy"}
-        ), patch.object(
-            health_checker, "check_database", return_value={"status": "healthy"}
-        ):
+        ), patch.object(health_checker, "check_database", return_value={"status": "healthy"}):
             result = await health_checker.full_health_check()
 
             assert result["status"] == "healthy"
