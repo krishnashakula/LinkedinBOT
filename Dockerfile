@@ -12,5 +12,5 @@ ENV NODE_ENV=production \
 # Expose the n8n port
 EXPOSE 5678
 
-# Use the default n8n entrypoint
-CMD ["n8n"]
+# Start n8n properly
+CMD ["n8n", "start"]
