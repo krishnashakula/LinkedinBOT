@@ -40,9 +40,8 @@ class Config:
 
     # Redis Queue
     QUEUE_BULL_REDIS_HOST: str | None = os.getenv("QUEUE_BULL_REDIS_HOST")
-    QUEUE_BULL_REDIS_PORT: int | None = (
-        int(port) if (port := os.getenv("QUEUE_BULL_REDIS_PORT")) is not None else None
-    )
+    _redis_port = os.getenv("QUEUE_BULL_REDIS_PORT")
+    QUEUE_BULL_REDIS_PORT: int | None = int(_redis_port) if _redis_port is not None else None
     QUEUE_BULL_REDIS_PASSWORD: str | None = os.getenv("QUEUE_BULL_REDIS_PASSWORD")
 
     # Logging
